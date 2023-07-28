@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const productoRoutes = require('./src/routes/productos');
 const pacientesRoutes = require('./src/routes/pacientes');
+const medicamentosRoutes = require('./src/routes/medicamentos');
 
 const ISSUER_BASE_URL = process.env.ISSUER_BASE_URL;
 const AUDIENCE = process.env.AUDIENCE;
@@ -27,6 +28,7 @@ const checkJwt = auth();
 app.use(express.json());
 app.use('/api', productoRoutes);
 app.use('/api', pacientesRoutes);
+app.use('/api', medicamentosRoutes);
 
 app.get('/api/public', function(req, res) {
   res.json({
