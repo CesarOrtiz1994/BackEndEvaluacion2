@@ -14,6 +14,10 @@ const pacientesSchema = mongoose.Schema({
     sangre: {
         type: String,
         required: true,
+    },
+    idDoctor: {
+        type: String,
+        required: true,
     }
 });
 

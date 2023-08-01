@@ -18,14 +18,13 @@ router.post('/paciente', checkJwt, function(req, res) {
 });
 
 // obtener todos los pacientes
-router.get('/pacientes', checkJwt, function(req, res) {
-    
-    pacientesSchema.find().then((pacientes) => {
+router.post('/pacientes', checkJwt, function(req, res) {
+    const { idDoctor } = req.body;
+    pacientesSchema.find({ idDoctor: idDoctor }).then((pacientes) => {
         res.json(pacientes);
     }).catch((error) => {
         console.log('Error al obtener los pacientes', error);
     });                         
-
   });
 
 // obtener un paciente por id
