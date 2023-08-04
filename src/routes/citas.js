@@ -19,14 +19,13 @@ router.post("/citas", checkJwt, function (req, res) {
 })
 
 router.get("/citas", checkJwt, (req, res) => {
-  console.log(req)
-  const doctorId = req.idDoctor
+  const doctorId = req.query.idDoctor // Use req.query to access query parameters
 
   citasSchema
-    .find()
+    .find({ doctor: doctorId })
     .populate("paciente")
     .then((citas) => {
-      res.json(citas)
+      res.status(200).json(citas)
     })
     .catch((e) => {
       console.log("Error al obtener las citas", e)
