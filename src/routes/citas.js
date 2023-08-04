@@ -10,18 +10,21 @@ router.post("/citas", checkJwt, function (req, res) {
   cita
     .save()
     .then((cita) => {
-      res.json(cita)
+      res.status(201).json(cita)
     })
     .catch((e) => {
       console.log("Error al guardar la cita", e)
-
       res.status(500).json({ error: e })
     })
 })
 
 router.get("/citas", checkJwt, (req, res) => {
+  console.log(req)
+  const doctorId = req.idDoctor
+
   citasSchema
     .find()
+    .populate("paciente")
     .then((citas) => {
       res.json(citas)
     })
@@ -63,7 +66,7 @@ router.delete("/citas/:id", checkJwt, (req, res) => {
   citasSchema
     .findByIdAndRemove(id)
     .then((cita) => {
-      res.json(cita)
+      res.status(204).json(cita)
     })
     .catch((e) => {
       console.log("Error al eliminar la cita", e)

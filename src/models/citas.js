@@ -1,12 +1,12 @@
 const mongoose = require("mongoose")
-
+// const DateOnly = require("mongoose-dateonly")(mongoose)
 const citasSchema = mongoose.Schema({
   doctor: {
     type: String,
     required: true,
   },
   fecha: {
-    type: Date,
+    type: String,
     required: true,
   },
   hora: {
@@ -18,10 +18,6 @@ const citasSchema = mongoose.Schema({
     ref: "Paciente",
     required: true,
   },
-  //   doctor: {
-  //     type: String,
-  //     required: true,
-  //   },
 })
 
 module.exports = mongoose.model("Citas", citasSchema)
